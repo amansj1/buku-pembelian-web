@@ -14,6 +14,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      isPkp: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      no_faktuk: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       id_company: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -27,6 +35,18 @@ module.exports = {
         allowNull: false,
       },
       total_nota: {
+        type: Sequelize.DECIMAL(12, 2),
+        allowNull: false,
+      },
+      disc: {
+        type: Sequelize.DECIMAL(12, 2),
+        allowNull: true,
+      },
+      ongkir: {
+        type: Sequelize.DECIMAL(12, 2),
+        allowNull: true,
+      },
+      grand_total: {
         type: Sequelize.DECIMAL(12, 2),
         allowNull: false,
       },

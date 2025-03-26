@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SJA | Register Page</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="/admintemp/plugins/fontawesome-free/css/all.min.css"
+    />
+    <!-- icheck bootstrap -->
+    <link
+      rel="stylesheet"
+      href="/admintemp/plugins/icheck-bootstrap/icheck-bootstrap.min.css"
+    />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/admintemp/dist/css/adminlte.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body class="hold-transition login-page">
+   
+    <div class="login-box">
+      <div class="login-logo">
+        <a href="#"><b>Register</b> ADMIN</a>
+      </div>
+      <!-- /.login-logo -->
+      <div class="card">
+          <div class="card-body register-card-body">
+            <p class="login-box-msg">Formulir Pengguna Baru</p>
+      
+            <form action="/auth/signup" method="post">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Nama Lengkap" name="nama">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                  <select class="form-control" name="id_role">
+                    <option selected="true" disabled="disabled">- Roles -</option>
+                    <% role.forEach((role) => {  %>
+                      <option value=<%= role.id_role %>><%= role.role %> </option>
+                      <% }) %>
+                  </select>
+              </div>
+              <div class="input-group mb-3">
+                <select class="form-control" name="isPusat">
+                  <option selected="true" disabled="disabled">- Pusat -</option>
+                    <option value="1">Ya</option>
+                    <option value="0">Tidak</option>
+                </select>
+            </div>
+             
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Username" name="username">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="Password" name="password">
+                <input type="hidden"  name="resetPass" value="true">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <!-- /.col -->
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </div>
+                <!-- /.col -->
+              </div>
+            </form>
+          </div>
+          <!-- /.form-box -->
+        </div><!-- /.card -->
+      </div>
+    <!-- /.login-box -->
+
+    <!-- jQuery -->
+    <script src="/admintemp/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/admintemp/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/admintemp/dist/js/adminlte.min.js"></script>
+  </body>
+</html>

@@ -26,6 +26,10 @@ module.exports = {
         type: Sequelize.DECIMAL(12, 2),
         allowNull: false,
       },
+      disc: {
+        type: Sequelize.DECIMAL(12, 2),
+        allowNull: true,
+      },
       total_harga: {
         type: Sequelize.DECIMAL(12, 2),
         allowNull: false,
