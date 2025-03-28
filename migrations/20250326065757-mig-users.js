@@ -10,10 +10,6 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
-      id_company: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       nama: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -28,6 +24,14 @@ module.exports = {
       },
       role: {
         type: Sequelize.STRING,
+        allowNull: true,
+      },
+      id_company: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      resetPass: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
       },
       status: {

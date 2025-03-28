@@ -7,6 +7,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const helmet = require("helmet");
 
+var authRouter = require("./routes/auth");
 var app = express();
 
 app.disable("x-powered-by");

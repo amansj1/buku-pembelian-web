@@ -1,0 +1,44 @@
+var express = require('express');
+// const router = express.Router();
+const jwt = require("jsonwebtoken");
+const config = require("../config/auth.config");
+
+
+exports.verifyToken = async (req, res, next) => {
+  // console.log("middleware works");
+  
+  let token = req.cookies.token;
+  
+  if (!token) {
+    console.log("token not found");
+    req.flash('error_msg', 'Silahkan Login terlebih dahulu!!');
+    return res.redirect("/login");
+  }
+
+  if (req.resetPass == true){ 
+    //lempar ke tampilan reset password 
+    }
+
+  try {
+  var decoded = jwt.verify(token, config.secret);
+ 
+  req.id_user = decoded.id_user;
+  req.id_role = decoded.id_role;
+  req.username = decoded.username;
+  req.id_company = decoded.id_company;
+  req.isPusat = decoded.isPusat;
+  
+  next();
+
+} catch(err) {
+  // err
+  console.log(err);
+  res.clearCookie("cookies");
+  
+  return res.redirect("/login");
+}
+
+  
+  
+  
+};

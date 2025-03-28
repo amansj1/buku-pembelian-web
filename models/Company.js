@@ -13,10 +13,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Company.associate = (models) => {
-    Company.hasMany(models.Users, { foreignKey: "id_company" });
-    Company.hasMany(models.Purchase, { foreignKey: "id_company" });
-  };
-
   return Company;
 };
