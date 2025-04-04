@@ -8,6 +8,7 @@ var logger = require("morgan");
 const helmet = require("helmet");
 
 var authRouter = require("./routes/auth");
+var indexRouter = require("./routes/index");
 var app = express();
 
 app.disable("x-powered-by");
@@ -58,12 +59,17 @@ app.get("/login", (req, res) => {
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+var expressLayouts = require("express-ejs-layouts");
+app.use(expressLayouts);
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use("/dashboard", indexRouter);
+app.use("/auth", authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

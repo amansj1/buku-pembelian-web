@@ -46,18 +46,17 @@
                 </div>
               </div>
               <div class="input-group mb-3">
-                  <select class="form-control" name="id_role">
+                  <select class="form-control" name="role">
                     <option selected="true" disabled="disabled">- Roles -</option>
-                    <% role.forEach((role) => {  %>
-                      <option value=<%= role.id_role %>><%= role.role %> </option>
-                      <% }) %>
+                    <option value="akun">Akun</option>
+                    <option value="admin">Admin</option>
                   </select>
               </div>
               <div class="input-group mb-3">
-                <select class="form-control" name="isPusat">
-                  <option selected="true" disabled="disabled">- Pusat -</option>
-                    <option value="1">Ya</option>
-                    <option value="0">Tidak</option>
+                <select class="form-control" name="id_company">
+                  <option selected="true" disabled="disabled">- Company -</option>
+                  <option value="SJA">Senang Jaya Abadi</option>
+                  <option value="PSA">Pemuda Sukses Abadi</option>
                 </select>
             </div>
              
