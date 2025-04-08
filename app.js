@@ -9,6 +9,7 @@ const helmet = require("helmet");
 
 var authRouter = require("./routes/auth");
 var indexRouter = require("./routes/index");
+var notaRouter = require("./routes/nota");
 var app = express();
 
 app.disable("x-powered-by");
@@ -70,6 +71,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/dashboard", indexRouter);
 app.use("/auth", authRouter);
+app.use("/nota", notaRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
