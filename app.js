@@ -9,7 +9,8 @@ const helmet = require("helmet");
 
 var authRouter = require("./routes/auth");
 var indexRouter = require("./routes/index");
-var notaRouter = require("./routes/nota");
+var itemRouter = require("./routes/item");
+
 var app = express();
 
 app.disable("x-powered-by");
@@ -18,6 +19,13 @@ const http = require("http");
 const PORT = process.env.PORT;
 
 app.get("/", (req, res) => res.redirect("/login"));
+
+app.get("/test", (req, res) => {
+  res.render("inputnota", {
+    layout: "layout/layoutadmin",
+  });
+});
+
 app.use(
   helmet({
     hidePoweredBy: true, // Sembunyikan "X-Powered-By"
@@ -71,7 +79,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/dashboard", indexRouter);
 app.use("/auth", authRouter);
-app.use("/nota", notaRouter);
+app.use("/item", itemRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

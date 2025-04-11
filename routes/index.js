@@ -33,4 +33,15 @@ router.get("/", function (req, res, next) {
   });
 });
 
+router.get("/test", (req, res) => {
+  res.render("inputnota", {
+    layout: "layout/layoutadmin",
+    username: req.username,
+    title: "Senang Jaya Abadi",
+    activepage: 1,
+    message: 0,
+    style: 0,
+  });
+});
+
 module.exports = router;

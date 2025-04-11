@@ -1,1 +1,580 @@
+         
+<section class="content">
+   <div class="container-fluid">
+     <div class="row">
+       <div class="col-12">
+         <div class="callout callout-info">
+            <h5><i class="fas fa-info"></i> Note:</h5>
+            Silahkan isi form dibawah ini untuk menambahkan estimasi service, pastikan data yang diinputkan benar. 
+          </div>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title"><b>Tambah Service</b></h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <form action="estimasi/create" method="post">
+                  <div class="col-sm-12 ">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="row">
+                          
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <small for="">Tanggal Service</small>
+                              <input type="hidden" name="id_tiket">
+                              <input type="date" class="form-control"  name="tgl_tiket" value="<%= new Date().toISOString().split('T')[0] %>" placeholder="Tanggal Service" required >
+                            </div>
+                          </div>
+                          
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <small for="">Nama PIC Montir</small>
+                              <input type="text" class="form-control"  name="pic_montir" placeholder="Nama PIC Montir" >
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <small for="">Nama QC</small>
+                              <input type="text" class="form-control"  name="qc" placeholder="Quality Control" >
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <small for="">Status Tiket</small>
+                              <select class="form-control" id="status" name="status" disabled>
+                                <option value="PENDING" selected>PENDING</option>
+
+                            </select>
+                            </div>
+                          </div>
+                      </div>
+
+                       <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <small for="">Customer Terdaftar</small> 
+                                <div class="d-flex align-items-center gap-3">
+                                  <select class="form-control select2" id="customerSelect" name="id_cust">
+                                      <option value="" selected disabled>Pilih Customer</option>
+                                 
+                                  </select>
+                                  <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal-lg-cust">+</button>
+                              </div>
+                             </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                  <small for="">Kendaraan</small>
+                                  <div class="d-flex align-items-center gap-3">
+                                    <select class="form-control select2" id="kendaraanSelect" name="id_kend" required>
+                                        <option value=""selected disabled>Pilih Kendaraan</option>
+                                        
+                                    </select>
+                                    <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal-lg-kend">+</button>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" hidden>
+                                <div class="form-group">
+                                  <small for="">Nomor Kontrak Project</small>
+                                  <div class="d-flex align-items-center gap-3">
+                                    <select class="form-control select2">
+                                        <option value=""selected disabled>Pilih Kontrak Project</option>
+                                        
+                                        
+                                    </select>
+                                    <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modal-lg-kont">+</button>
+                                </div>
+                                </div>
+                            </div>
+                          </div>
+                       </div>
+
+                       <div class="col-sm-12">
+                        <div class="row">
+                          <div class="form-group">
+                            <small for="">Keterangan</small> 
+                          
+                            <textarea class="form-control" name="keterangan" cols="220" rows="4" name="ket" placeholder="Keterangan" id="ket"></textarea>
+                         
+                        </div>
+                        </div>
+                      </div>
+                       <button type="submit" class="btn btn-primary float-right">Simpan</button>  
+                      </form>
+
+                     
+                      <div class="col-sm-12">
+                        <div class="row">
+                          
+                        </div>
+                      </div>
+                  
+                 
+                  </div>
+              </div>                     
+              </div>
+              <div class="modal-footer justify-content-between">
+                
+               
+            
+
+
+              </div>
+           <!-- /.card-body -->
+            </div>
+          </div>
+          
+         <!-- /.card -->
+       </div>
+       <!-- /.col -->
+     </div>
+     <!-- /.row -->
+   </div>
+   <!-- /.container-fluid -->
+ </section>
+
+
+ <div class="modal fade" id="modal-lg-cust">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> Tambah Customer</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="customerForm" method="post">
+            <div class="col-sm-12 ">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <small for="">Instansi</small> 
+                    <input type="text" class="form-control" placeholder="Nama Instansi" id="instansi" name="instansi" required> 
+                  </div>
+                </div>
+
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <small for="">Alamat</small>
+                        <input type="text" class="form-control" placeholder="Alamat" id="alamat" name="alamat">
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-sm-12">
+                <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <small for="">Penanggung Jawab</small>
+                    <input type="text" class="form-control" placeholder="Nama Penanggung Jawab" id="pic" name="pic" >
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <small for="">Kontak</small> 
+                    <input type="text" class="form-control" placeholder="Kontak" id="kontak" name="kontak">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-sm-12">
+              <div class="row">
+                <div class="form-group">
+                  <small for="">Keterangan</small> 
+                <div class="input-group mb-12">
+                  <textarea class="form-control" name="keterangan" cols="100" rows="4" name="keterangan" id="keterangan" placeholder="Keterangan"></textarea>
+                </div>
+              </div>
+              </div>
+            </div>
+            </div>
+        </div>                           
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+        <button type="submit" class="btn btn-primary float-right">Simpan</button>  
+      </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+</div>
  
+
+<div class="modal fade" id="modal-lg-kend">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">Tambah Kendaraan</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form id="kendForm" enctype="multipart/form-data">
+            <div class="col-sm-12 ">
+              <div class="row">
+                 <div class="col-sm-2">
+                       <div class="form-group">
+                          <small for="">Nomor Polisi</small> 
+                          <input type="text" class="form-control" placeholder="X 0000 XX" name="nopol" id="nopol" required> 
+                        </div>
+                 </div>
+                 <div class="col-sm-3">
+                    <div class="form-group">
+                      <small for="">Nomor Rangka</small> 
+                       <input type="text" class="form-control" placeholder="Nomor Rangka" name="no_rangka" id="no_rangka"> 
+                    </div>
+                 </div>
+                 <div class="col-sm-3">
+                    <div class="form-group">
+                       <small for="">Nomor Mesin</small> 
+                       <input type="text" class="form-control" placeholder="Nomor Mesin" name="no_mesin" id="no_mesin"> 
+                    </div>
+                 </div>
+                 <div class="col-sm-4">
+                    <div class="form-group">
+                       <small for="">Customer Terdaftar</small> 
+                       <select class="form-control select2" name="id_cust" id="customerSelect1">
+                         <option selected="true" disabled="disabled">- Customer -</option>
+                      
+                       </select>
+                     </div>
+                 </div> 
+              </div>
+           </div>
+           <div class="col-sm-12">
+             <div class="row"> 
+               <div class="col-sm-3">
+                 <div class="form-group">
+                   <small for="">Chasis</small>
+                   <input type="text" class="form-control" placeholder="Chasis" name="chasis" id="chasis">
+                 </div>
+               </div>
+               <div class="col-sm-3">
+                 <div class="form-group">
+                   <small for="">Dealer</small>
+                   <input type="text" class="form-control" placeholder="Dealer" name="dealer" id="dealer">
+                 </div>
+               </div>
+               <div class="col-sm-3">
+                 <div class="form-group">
+                   <small for="">Tahun Pembuatan Kendaraan</small>
+                   <input type="number" class="form-control" maxlength="4" placeholder="Tahun" value="<%= new Date().getFullYear() %>" name="tahun" id="tahun">
+                 </div>
+               </div>
+               <div class="col-sm-3">
+                 <div class="form-group">
+                   <small for="">Kategori/Karoseri</small>
+                   <select class="form-control select2" name="id_kategori" id="id_kategori">
+                     <option selected="true" disabled="disabled"  >- Kategori -</option>
+                    
+                   </select>
+                 </div>
+               </div>
+           </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="form-group">
+              <small for="">Keterangan</small> 
+              <div class="input-group mb-12">
+              <textarea class="form-control" name="keterangan" id="keterangan" cols="100" rows="4" name="ket" placeholder="Keterangan"></textarea>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="col-sm-12 d-flex justify-content-end">
+          <div class="row">
+                <div class="form-group float-right">
+                  <small>Foto Kendaraan</small>
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="exampleInputFile" cols="100" name="photo">
+                      <label class="custom-file-label" for="exampleInputFile">Pilih Foto Kendaraan</label>
+                    </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+        </div>             
+      
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+        <button type="submit" class="btn btn-primary float-right">Simpan</button>  
+      </div>
+    </form>
+   
+    </div>
+  </div>
+    <!-- /.modal-content -->
+</div>
+
+<div class="modal fade" id="modal-lg-kont">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Tambah Kontrak Project</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/kontrak/createapi" method="post">
+            <div class="col-sm-12 ">
+              <div class="row">
+
+                 <div class="col-sm-12">
+                    <div class="row">
+                       <div class="col-sm-3">
+                          <div class="form-group">
+                             <small for="">Customer Terdaftar</small> 
+                             <select class="form-control select2" name="id_cust" id="customerSelect2">
+                               <option selected="true" class="cstk1" disabled="disabled">- Customer -</option>
+                             
+                             </select>
+                           </div>
+                       </div>
+                       <div class="col-sm-5">
+                          <div class="form-group">
+                            <small for="">Judul Kontrak Project</small>
+                            <input type="text" class="form-control" placeholder="Kontrak" name="nama_kontrak">
+                            
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <small for="">Nomor Kontrak Project</small>
+                            <input type="text" class="form-control" placeholder="Nomor Kontrak" name="no_kontrak">
+                            
+                          </div>
+                        </div>
+                    </div>
+                 </div>
+                
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <small for="">Tanggal Mulai Kontrak</small>
+                        <input type="date" class="form-control"  name="tgl_k_start" required>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <small for="">Deadline Kontrak</small>
+                        <input type="date" class="form-control" name="tgl_k_end" required>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <small for="">Target Internal Project Selesai</small>
+                        <input type="date" class="form-control" name="tgl_selesai_internal">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <small for="">_</small>
+                        <input type="number" class="form-control" name="fe_k" value=0>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <small for="">Nominal Project (Nominal) </small>
+                        <input type="number" class="form-control" name="nominal_k" value=0>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <small for="">Realisasi Project (Nominal)</small>
+                        <input type="number" class="form-control" name="realis_k" value=0>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+            <div class="col-sm-12">
+              <div class="row">
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <small for="">Referensi Marketing</small>
+                    <input type="text" class="form-control" placeholder="Referensi Marketing" name="ref_marketing">
+                  </div>
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                     <small for="">Status Project</small> 
+                     <select class="form-control" name="status" >
+                       <option   disabled="disabled">- Status Project -</option>
+                       <option selected="true" value="ACTIVE">ACTIVE</option> 
+                        <option value="PENDING">PENDING</option>
+                        <option value="CANCEL">CANCEL</option>
+                        <option value="DONE">DONE</option>
+                     </select>
+                   </div>
+               </div>
+
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="row">
+                <div class="form-group">
+                  <small for="">Keterangan</small> 
+                <div class="input-group mb-12">
+                  <textarea class="form-control" cols="100" rows="2" name="ket" placeholder="Keterangan"></textarea>
+                </div>
+              </div>
+              </div>
+            </div>
+            </div>
+        </div>                           
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+        <button type="submit" class="btn btn-primary float-right">Simpan</button>  
+      </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+</div>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script>
+  
+  $(document).ready(function () {
+    // Event listener untuk form tambah customer
+    $('#customerForm').submit(function (e) {
+        e.preventDefault(); // Mencegah halaman refresh
+
+        // Ambil data dari form
+        let formData = {
+            instansi: $('#instansi').val(),
+            alamat: $('#alamat').val(),
+            pic: $('#pic').val(),
+            kontak: $('#kontak').val(),
+            keterangan: $('#keterangan').val()
+        };
+       
+
+        // Kirim data ke server menggunakan AJAX
+        $.ajax({
+            url: "/cust/createapi", // Endpoint backend untuk menyimpan customer
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(formData),
+            success: function (response) {
+                if (response.success) {
+                    let newCustomer = response.customer; // Data customer baru dari server
+                  console.log(newCustomer);
+                    // Tambahkan customer baru ke dalam select dropdown
+                    $('#customerSelect').append(
+                        `<option value="${newCustomer.id_cust }" selected>${newCustomer.instansi} - ${newCustomer.pic}</option>`
+                    );
+                    $('#customerSelect1').append(
+                        `<option value="${newCustomer.id_cust }" selected>${newCustomer.instansi} - ${newCustomer.pic}</option>`
+                    );
+                    $('#customerSelect2').append(
+                        `<option value="${newCustomer.id_cust }" selected>${newCustomer.instansi} - ${newCustomer.pic}</option>`
+                    );
+
+                    // Tutup modal setelah sukses
+                    $('#modal-lg-cust').modal('hide');
+
+                    // Reset form setelah simpan
+                    $('#customerForm')[0].reset();
+                } else {
+                    alert("Gagal menambahkan customer: " + response.message);
+                }
+            },
+            error: function () {
+                alert("Terjadi kesalahan saat menyimpan data.");
+            }
+        });
+    });
+
+    // Event listener untuk form tambah kendaraan
+    $('#kendForm').submit(function (e) {
+        e.preventDefault(); // Mencegah halaman refresh
+
+        // Ambil data dari form
+        let formData = new FormData(this);
+          //  console.log(formData);
+
+        //   for (let pair of formData.entries()) {
+        // console.log(pair[0] + ": " + pair[1]); // Menampilkan nama dan nilai setiap input
+    // }
+        $.ajax({
+            url: "/kend/createapi", 
+            type: "POST",
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (response) {
+                if (response.success) {
+                    let newKend = response.kendaraan; // Data customer baru dari server
+                  console.log(newKend);
+                    // Tambahkan customer baru ke dalam select dropdown
+                    $('#kendaraanSelect').append(
+                        `<option value="${newKend.id_kend}" selected>${newKend.nopol} - ${newKend.chasis}</option>`
+                    );
+                 
+                    // Tutup modal setelah sukses
+                    $('#modal-lg-kend').modal('hide');
+
+                    // Reset form setelah simpan
+                    $('#kendForm')[0].reset();
+                } else {
+                    alert("Gagal menambahkan kendaraan: " + response.message);
+                }
+            },
+            error: function () {
+                alert("Terjadi kesalahan saat menyimpan data.");
+            }
+        });
+    });
+});
+  $(document).on('click','#identifyingClass',function(event){
+   event.preventDefault();
+    var idc = $(this).data('id');
+    var inst = $(this).data('instansi');
+    var pic = $(this).data('pic');
+    var alamat = $(this).data('alamat');
+    var kontak = $(this).data('kontak');
+    var ket = $(this).data('ket');
+    
+    
+    document.getElementById("id_cust").value = idc;
+    document.getElementById("instansi").value = inst;
+    document.getElementById("pic").value = pic;
+    document.getElementById("alamat").value = alamat;
+    document.getElementById("kontak").value = kontak;
+    document.getElementById("ket").value = ket;
+    
+    
+    
+
+    
+    
+   
+    
+  });
+  </script>
