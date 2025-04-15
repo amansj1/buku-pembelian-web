@@ -23,7 +23,9 @@ var middlewareAuthJwt = require("../middleware/index");
 router.use(middlewareAuthJwt);
 
 router.get("/", async (req, res) => {
-  const item = await Item.findAll();
+  var item = await Item.findAll();
+
+  console.log(item);
   res.render("v_item", {
     layout: "layout/layoutadmin",
     username: req.username,
@@ -31,7 +33,7 @@ router.get("/", async (req, res) => {
     activepage: 1,
     message: 0,
     style: 0,
-    item: item,
+    item,
   });
 });
 
@@ -74,7 +76,8 @@ router.post("/create", async (req, res) => {
 router.post("/update", async (req, res) => {
   // console.log(req.body);
   try {
-    const item = await Item.findOne(req.body.id_item);
+    req.body.id_item = parseInt(req.body.id_item);
+    const item = await Item.findByPk(req.body.id_item);
     if (!item) {
       req.flash("warning_msg", " Item tidak ditemukan");
       return res.redirect("/item");

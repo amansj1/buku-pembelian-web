@@ -26,8 +26,39 @@
                 <th style="width: 90px">Actions</th>
               </tr>
               </thead>
-              <tbody></tbody>
-              
+              <tbody>
+                <% item.forEach(function(item) {%>
+                  <tr>
+                    <td><%= item.no_item %></td>
+                    <td> <%= item.nama_item %></td>
+                    <td> <%= item.kategori %></td>
+                    <td> <%= item.satuan %></td>
+                    <td> <%= item.ket %></td>
+                    <td>
+                      <div class="row col-sm-12 text-center">
+                        <div class="col-sm-6">
+                          <button type="button" class="btn btn-default btn-sm" id="identifyingClass" data-toggle="modal" data-target="#Formedit"
+                          data-iditem="<%= item.id_item %>"
+                          data-noitem="<%= item.no_item %>"
+                          data-namaitem="<%= item.nama_item %>"
+                          data-kategori="<%= item.kategori %>"
+                          data-satuan="<%= item.satuan %>"
+                          data-ket="<%= item.ket %>"                          
+                          ><i class="nav-icon fas fa-edit"></i></button>
+                        </div>
+                        <div class="col-sm-6">
+                          <form action="/item/delete" method="post">
+                            <input type="hidden" name="id_item" value="<%= item.id_item %>" />
+                          <button type="submit" class="btn  btn-danger btn-sm float-right"><i class="fas fa-trash"></i></button>
+                        </form>
+                         
+                      </div>
+                      </div>
+                      
+                    </td>
+                  </tr>
+                  <% }) %>
+              </tbody>
             </table>
           </div>
 
@@ -106,8 +137,14 @@
            <div class="modal fade" id="Formedit">  
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Edit Bahan Baku</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
                 <div class="modal-body">
-                  <form action="/item/create" method="post">
+                  <form action="/item/update" method="post">
                       <div class="col-sm-12 ">
                         <div class="row">
                           <div class="col-sm-12">
@@ -116,6 +153,7 @@
                                 <div class="form-group">
                                  
                                   <small for="">No Bahan Baku</small> 
+                                  <input type="hidden" name="id_item" id="id_item">
                                   <input type="text" class="form-control" placeholder="Nomor Bahan Baku" name="no_item" id="no_item">
                                 </div>
                               </div>
@@ -180,6 +218,24 @@
 
 <script>
  
+ $(document).on('click','#identifyingClass',function(){
+  //  event.preventDefault();
+    var iditm =  $(this).data('iditem');
+    var noitem = $(this).data('noitem');
+    var namaitem = $(this).data('namaitem');
+    var satuan = $(this).data('satuan');
+    var idkat = $(this).data('kategori');
+    var ket = $(this).data('ket');
+    
+    document.getElementById("id_item").value = iditm;
+    document.getElementById("no_item").value = noitem;
+    document.getElementById("nama_item").value = namaitem;
+    document.getElementById("satuan").value = satuan;
+    document.getElementById("kategori").value = idkat;
+    document.getElementById("ket").value = ket;
+    
+    
+  });
    
 </script>
 
