@@ -10,6 +10,7 @@ const helmet = require("helmet");
 var authRouter = require("./routes/auth");
 var indexRouter = require("./routes/index");
 var itemRouter = require("./routes/item");
+var supplierRouter = require("./routes/supplier");
 
 var app = express();
 
@@ -80,6 +81,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/dashboard", indexRouter);
 app.use("/auth", authRouter);
 app.use("/item", itemRouter);
+app.use("/supplier", supplierRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -11,7 +11,7 @@ var expressLayouts = require("express-ejs-layouts");
 const { QueryTypes } = require("sequelize");
 const Validator = require("fastest-validator");
 
-const { Item, Log_action } = require("../models/index");
+const { Item, Log_action, Dtl_purchase } = require("../models/index");
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(expressLayouts);
@@ -70,6 +70,45 @@ router.post("/create", async (req, res) => {
   } catch (err) {
     console.error("Create item error:", err);
     res.status(500).json({ error: "Failed to create item" });
+  }
+});
+
+router.post("/delete", async (req, res) => {
+  // console.log(req.body);
+  try {
+    req.body.id_item = parseInt(req.body.id_item);
+    const item = await Item.findByPk(req.body.id_item);
+    var itemUsed = await Dtl_purchase.findOne({
+      where: { id_item: req.body.id_item },
+    });
+    var itemUsed2 = await Harga_supplier.findOne({
+      where: { id_item: req.body.id_item },
+    });
+    if (!item) {
+      req.flash("warning_msg", " Item tidak ditemukan");
+      return res.redirect("/item");
+    }
+    if (itemUsed || itemUsed2) {
+      req.flash(
+        "warning_msg",
+        " Item tidak bisa dihapus karena sudah digunakan pada transaksi lain"
+      );
+      return res.redirect("/item");
+    }
+    await item.destroy();
+    req.flash(
+      "success_msg",
+      req.username + " Berhasil menghapus bahan baku " + item.nama_item + "!!"
+    );
+    await Log_action.create({
+      id_user: req.id_user,
+      action: req.username + " Berhasil menghapus bahan baku " + item.nama_item,
+      tgl_action: new Date(),
+    });
+    res.redirect("/item");
+  } catch (err) {
+    console.error("Delete item error:", err);
+    res.status(500).json({ error: "Failed to delete item" });
   }
 });
 
