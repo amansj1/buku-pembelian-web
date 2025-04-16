@@ -7,9 +7,9 @@
 
          <div class="card">
            <div class="card-header">
-             <h1 class="card-title"><b>Bahan Baku</b></h1>
+             <h1 class="card-title"><b>Supplier</b></h1>
              <button type="button" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#modal-lg">
-              <b>+ </b> Tambah Item Bahan Baku
+              <b>+ </b> Tambah supplier baru
             </button>
            </div>
 
@@ -18,10 +18,11 @@
             <table id="example1" class="table table-bordered table-striped">
               <thead>
               <tr>
-                <th style="width: 120px">No Bahan Baku</th>
-                <th>Nama Bahan Baku</th>
-                <th>kategori</th>
-                <th>Satuan</th>
+                <th style="width: 120px">No Supplier</th>
+                <th>Nama Supplier</th>
+                <th>Telepon</th>
+                <th>Email</th>
+                <th>Alamat</th>
                 <th>Keterangan</th>
                 <th style="width: 90px">Actions</th>
               </tr>
@@ -38,13 +39,13 @@
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Tambah Bahan Baku</h4>
+                  <h4 class="modal-title">Tambah Supplier</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form action="/item/create" method="post">
+                  <form action="/supplier/create" method="post">
                       <div class="col-sm-12 ">
                         <div class="row">
                           <div class="col-sm-12">
@@ -52,26 +53,26 @@
                               <div class="col-sm-3">
                                 <div class="form-group">
                                  
-                                  <small for="">No Bahan Baku</small> 
-                                  <input type="text" class="form-control" placeholder="Nomor Bahan Baku" name="no_item">
+                                  <small for="">Nomor Supplier</small> 
+                                  <input type="text" class="form-control" placeholder="Nomor Supplier" name="no_supplier">
                                 </div>
                               </div>
                               <div class="col-sm-5">
                                 <div class="form-group">
-                                  <small for="">Nama Bahan Baku</small> 
-                                  <input type="text" class="form-control" placeholder="Nama Bahan Baku" name="nama_item" required>
+                                  <small for="">Nama Supplier</small> 
+                                  <input type="text" class="form-control" placeholder="Nama Bahan Baku" name="nama_supplier" required>
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <small for="">Kategori</small> 
-                                  <input type="text" class="form-control" placeholder="Kategori" name="kategori" required>
+                                  <small for="">Telepon</small> 
+                                  <input type="text" class="form-control" placeholder="Telepon" name="phone" required>
                                 </div>
                               </div>  
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <small for="">Satuan</small> 
-                                  <input type="text" class="form-control" placeholder="Satuan" name="satuan">
+                                  <small for="">Email</small> 
+                                  <input type="text" class="form-control" placeholder="Email" name="email">
                                 </div>
                               </div>
 
@@ -81,9 +82,9 @@
                       <div class="col-sm-12">
                         <div class="row">
                           <div class="form-group">
-                          <small for="">Keterangan</small> 
+                          <small for="">Alamat</small> 
                           <div class="input-group mb-12">
-                            <textarea class="form-control" name="ket" cols="100" rows="2" placeholder="Keterangan"></textarea>
+                            <textarea class="form-control" name="alamat" cols="100" rows="2" placeholder="Alamat"></textarea>
                           </div>
                         </div>
                         </div>
@@ -114,7 +115,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form action="/item/update" method="post">
+                  <form action="/item/create" method="post">
                       <div class="col-sm-12 ">
                         <div class="row">
                           <div class="col-sm-12">
@@ -122,27 +123,26 @@
                               <div class="col-sm-3">
                                 <div class="form-group">
                                  
-                                  <small for="">No Bahan Baku</small> 
-                                  <input type="hidden" name="id_item" id="id_item">
-                                  <input type="text" class="form-control" placeholder="Nomor Bahan Baku" name="no_item" id="no_item">
+                                  <small for="">Nomor Supplier</small> 
+                                  <input type="text" class="form-control" placeholder="Nomor Supplier" name="no_supplier">
                                 </div>
                               </div>
                               <div class="col-sm-5">
                                 <div class="form-group">
-                                  <small for="">Nama Bahan Baku</small> 
-                                  <input type="text" class="form-control" placeholder="Nama Bahan Baku" name="nama_item" id="nama_item" required>
+                                  <small for="">Nama Supplier</small> 
+                                  <input type="text" class="form-control" placeholder="Nama Bahan Baku" name="nama_supplier" required>
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <small for="">Kategori</small> 
-                                  <input type="text" class="form-control" placeholder="Kategori" name="kategori" id="kategori" required>
+                                  <small for="">Telepon</small> 
+                                  <input type="text" class="form-control" placeholder="Telepon" name="phone" required>
                                 </div>
                               </div>  
                               <div class="col-sm-2">
                                 <div class="form-group">
-                                  <small for="">Satuan</small> 
-                                  <input type="text" class="form-control" placeholder="Satuan" name="satuan" id="satuan">
+                                  <small for="">Email</small> 
+                                  <input type="text" class="form-control" placeholder="Email" name="email">
                                 </div>
                               </div>
 
@@ -152,9 +152,9 @@
                       <div class="col-sm-12">
                         <div class="row">
                           <div class="form-group">
-                          <small for="">Keterangan</small> 
+                          <small for="">Alamat</small> 
                           <div class="input-group mb-12">
-                            <textarea class="form-control" name="ket" id="ket" cols="100" rows="2" placeholder="Keterangan"></textarea>
+                            <textarea class="form-control" name="alamat" cols="100" rows="2" placeholder="Alamat"></textarea>
                           </div>
                         </div>
                         </div>
@@ -162,7 +162,6 @@
                       </div>
                                         
                 </div>
-              
               <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                 <button type="submit" class="btn btn-primary float-right">Simpan</button>  

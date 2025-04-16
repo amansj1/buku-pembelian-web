@@ -33,4 +33,27 @@ router.get("/", async (req, res) => {
   });
 });
 
+router.post("/create", async (req, res) => {
+  // console.log(req.body);
+  const existingSupp = await Supplier.findOne({
+    where: { no_supplier: req.body.no_supplier },
+  });
+
+  if (existingSupp) {
+    req.flash(
+      "warning_msg",
+      " No Supplier sudah digunakan pada " + existingSupp.nama_supplier + " !!"
+    );
+    return res.redirect("/supplier");
+  }
+
+  try {
+    await Item.create(req.body);
+    res.redirect("/item");
+  } catch (err) {
+    console.error("Create item error:", err);
+    res.status(500).send("Error creating item");
+  }
+});
+
 module.exports = router;
