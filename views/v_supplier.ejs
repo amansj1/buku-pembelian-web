@@ -23,12 +23,42 @@
                 <th>Telepon</th>
                 <th>Email</th>
                 <th>Alamat</th>
-                <th>Keterangan</th>
+
                 <th style="width: 90px">Actions</th>
               </tr>
               </thead>
               <tbody>
-               
+               <% supplier.forEach(function(supplier) { %>
+                <tr>
+                  <td><%= supplier.no_supplier %></td>
+                  <td><%= supplier.name %></td>
+                  <td><%= supplier.phone %></td>
+                  <td><%= supplier.email %></td>
+                  <td><%= supplier.address %></td>
+                  <td>
+                    <div class="row col-sm-12 text-center">
+                      <div class="col-sm-6">
+                        <button type="button" class="btn btn-default btn-sm" id="identifyingClass" data-toggle="modal" data-target="#Formedit"
+                        data-idsupp="<%= supplier.id_supplier %>"
+                        data-name="<%= supplier.name %>"
+                        data-nosupp="<%= supplier.no_supplier %>"
+                        data-phone="<%= supplier.phone %>"
+                        data-email="<%= supplier.email %>"
+                        data-address="<%= supplier.address %>"                                                 
+                        ><i class="nav-icon fas fa-edit"></i></button>
+                      </div>
+                      <div class="col-sm-6">
+                        <form action="/supplier/delete" method="post">
+                          <input type="hidden" name="id_supplier" value="<%= supplier.id_supplier %>" />
+                        <button type="submit" class="btn  btn-danger btn-sm float-right"><i class="fas fa-trash"></i></button>
+                      </form>
+                       
+                    </div>
+                    </div>
+                    
+                  </td>
+                </tr>
+                <% }); %>
               </tbody>
             </table>
           </div>
@@ -60,7 +90,7 @@
                               <div class="col-sm-5">
                                 <div class="form-group">
                                   <small for="">Nama Supplier</small> 
-                                  <input type="text" class="form-control" placeholder="Nama Bahan Baku" name="nama_supplier" required>
+                                  <input type="text" class="form-control" placeholder="Nama Supplier" name="name" required>
                                 </div>
                               </div>
                               <div class="col-sm-2">
@@ -84,7 +114,7 @@
                           <div class="form-group">
                           <small for="">Alamat</small> 
                           <div class="input-group mb-12">
-                            <textarea class="form-control" name="alamat" cols="100" rows="2" placeholder="Alamat"></textarea>
+                            <textarea class="form-control" oninput="this.value = this.value.replace(/(\r\n|\n|\r)/g, ' ')" name="address" cols="100" rows="2" placeholder="Alamat"></textarea>
                           </div>
                         </div>
                         </div>
@@ -109,13 +139,13 @@
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Edit Bahan Baku</h4>
+                  <h4 class="modal-title">Edit Supplier</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form action="/item/create" method="post">
+                  <form action="/supplier/update" method="post">
                       <div class="col-sm-12 ">
                         <div class="row">
                           <div class="col-sm-12">
@@ -124,25 +154,26 @@
                                 <div class="form-group">
                                  
                                   <small for="">Nomor Supplier</small> 
-                                  <input type="text" class="form-control" placeholder="Nomor Supplier" name="no_supplier">
+                                  <input type="hidden" name="id_supplier" id="id_supplier" value="">
+                                  <input type="text" class="form-control" placeholder="Nomor Supplier" id="no_supplier" name="no_supplier">
                                 </div>
                               </div>
                               <div class="col-sm-5">
                                 <div class="form-group">
                                   <small for="">Nama Supplier</small> 
-                                  <input type="text" class="form-control" placeholder="Nama Bahan Baku" name="nama_supplier" required>
+                                  <input type="text" class="form-control" placeholder="Nama Bahan Baku" name="name" id="name" required>
                                 </div>
                               </div>
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <small for="">Telepon</small> 
-                                  <input type="text" class="form-control" placeholder="Telepon" name="phone" required>
+                                  <input type="text" class="form-control" placeholder="Telepon" name="phone" id="phone" required>
                                 </div>
                               </div>  
                               <div class="col-sm-2">
                                 <div class="form-group">
                                   <small for="">Email</small> 
-                                  <input type="text" class="form-control" placeholder="Email" name="email">
+                                  <input type="text" class="form-control" placeholder="Email" name="email" id="email">
                                 </div>
                               </div>
 
@@ -154,7 +185,7 @@
                           <div class="form-group">
                           <small for="">Alamat</small> 
                           <div class="input-group mb-12">
-                            <textarea class="form-control" name="alamat" cols="100" rows="2" placeholder="Alamat"></textarea>
+                            <textarea class="form-control" oninput="this.value = this.value.replace(/(\r\n|\n|\r)/g, ' ')" name="address" id="address" cols="100" rows="2" placeholder="Alamat"></textarea>
                           </div>
                         </div>
                         </div>
@@ -189,19 +220,19 @@
  
  $(document).on('click','#identifyingClass',function(){
   //  event.preventDefault();
-    var iditm =  $(this).data('iditem');
-    var noitem = $(this).data('noitem');
-    var namaitem = $(this).data('namaitem');
-    var satuan = $(this).data('satuan');
-    var idkat = $(this).data('kategori');
-    var ket = $(this).data('ket');
+    var idsupp =  $(this).data('idsupp');
+    var nosupp = $(this).data('nosupp');
+    var namesupp = $(this).data('name');
+    var phonesupp = $(this).data('phone');
+    var emailsupp = $(this).data('email');
+    var address = $(this).data('address');
     
-    document.getElementById("id_item").value = iditm;
-    document.getElementById("no_item").value = noitem;
-    document.getElementById("nama_item").value = namaitem;
-    document.getElementById("satuan").value = satuan;
-    document.getElementById("kategori").value = idkat;
-    document.getElementById("ket").value = ket;
+    document.getElementById("id_supplier").value = idsupp;
+    document.getElementById("no_supplier").value = nosupp;
+    document.getElementById("name").value = namesupp;
+    document.getElementById("phone").value = phonesupp;
+    document.getElementById("email").value = emailsupp;
+    document.getElementById("address").value = address;
     
     
   });
